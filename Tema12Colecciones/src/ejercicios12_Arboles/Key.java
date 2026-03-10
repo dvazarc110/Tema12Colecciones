@@ -3,16 +3,16 @@ package ejercicios12_Arboles;
 public class Key {
 
 	Category category;
-	private static int num = 0;
+	int num = 0;
 	
 	Key(Category category){
 		this.category = category;
-		this.num = this.num++;
+		this.num = category.nextNum();
 	}
-	
+
 	@Override
 	public String toString() {
-		String output = String.format("%c%d", category.getCode(), num);
+		String output = String.format("%c%d", category.getCode(), this.num);
 		return output;
 	}
 	

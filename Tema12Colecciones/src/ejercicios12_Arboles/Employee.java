@@ -5,9 +5,9 @@ import java.time.temporal.ChronoUnit;
 
 public class Employee implements Comparable<Employee>{
 
-	Key key;
-	String name;
-	LocalDate startDate, endDate;
+	public Key key;
+	public String name;
+	public LocalDate startDate, endDate;
 	
 	Employee(String name,Category category,LocalDate startDate,LocalDate endDate){
 		this.key = new Key(category);
@@ -28,7 +28,7 @@ public class Employee implements Comparable<Employee>{
 	}
 	
 	public long daysWorked() {
-		long dias = (this.startDate).until((this.endDate != null)? this.endDate: LocalDate.now(), ChronoUnit.DAYS);
+		long dias = (this.startDate).until((this.endDate != null)? this.endDate: LocalDate.of(2025, 5, 7), ChronoUnit.DAYS);
 		return dias;
 	}
 
@@ -40,8 +40,11 @@ public class Employee implements Comparable<Employee>{
 
 	@Override
 	public int compareTo(Employee o) {
-		int result = (int)(daysWorked().compareTo(o.daysWorked()));
-		return 0;
+		int result = Long.compare(o.daysWorked(), daysWorked());
+		if(result ==0) {
+			result = (this.name).compareTo(o.name);
+		}
+		return result;
 	}
 
 	
